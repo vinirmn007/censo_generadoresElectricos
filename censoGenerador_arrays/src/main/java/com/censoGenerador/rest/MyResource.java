@@ -1,4 +1,4 @@
-package com.censoGenerador;
+package com.censoGenerador.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
