@@ -1,0 +1,7 @@
+#Ignorar pruebas
+**/pruebas.java
+
+**/target/
+
+/.vscode/
+
