@@ -1,6 +1,6 @@
-package com.censoGenerador.tda;
+package com.censoGenerador.list;
 
-public class Node {
+public class Node<E> {
     private E info; 
     private Node<E> next;
 

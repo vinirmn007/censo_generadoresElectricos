@@ -1,4 +1,4 @@
-package com.censoGenerador.tda;
+package com.censoGenerador.list;
 
 public class ListEmptyException extends Exception {
     public ListEmptyException(String msg) {

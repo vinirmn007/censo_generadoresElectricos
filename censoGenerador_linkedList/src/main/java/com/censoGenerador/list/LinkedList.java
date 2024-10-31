@@ -1,6 +1,6 @@
-package com.censoGenerador.tda;
+package com.censoGenerador.list;
 
-public class LinkedList {
+public class LinkedList<E> {
     private Node<E> header;
     private Node<E> last;
     private Integer size;
