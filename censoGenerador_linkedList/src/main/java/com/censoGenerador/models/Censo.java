@@ -3,22 +3,13 @@ package com.censoGenerador.models;
 import com.censoGenerador.list.LinkedList;
 
 public class Censo {
-    private Integer id;
     private LinkedList<Familia> familias;
 
     public Censo() {
-        this.id = 0;
         this.familias = new LinkedList<>();
     }
 
     //GETTERS Y SETTERS
-    public Integer getId() {
-        return this.id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public LinkedList<Familia> getFamilias() {
         return this.familias;
