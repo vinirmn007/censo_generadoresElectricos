@@ -4,9 +4,11 @@ import com.censoGenerador.list.LinkedList;
 
 public class Censo {
     private LinkedList<Familia> familias;
+    private LinkedList<Familia> familiasConGenerador;
 
     public Censo() {
         this.familias = new LinkedList<>();
+        this.familiasConGenerador = new LinkedList<>();
     }
 
     //GETTERS Y SETTERS
@@ -15,21 +17,24 @@ public class Censo {
         return this.familias;
     }
 
-    //OPERACIONES
-    public void addFamilias(Familia familia) {
-        this.familias.add(familia);
+    public void setFamilias(LinkedList<Familia> familias) {
+        this.familias = familias;
     }
 
     public LinkedList<Familia> getFamiliasConGenerador() {
-        Familia familiaArr[] = this.familias.toArray();
-        LinkedList<Familia> familiasConGenerador = new LinkedList<>();
+        determinarFamiliasConGenerador();
+        return this.familiasConGenerador;
+    }
 
-        for (int i = 0; i < familiaArr.length; i++) {
-            if (familiaArr[i].getGeneradores().isEmpty() == false) {
-                familiasConGenerador.add(familiaArr[i]);
+    public void determinarFamiliasConGenerador() {
+        this.familiasConGenerador.reset();
+
+        Familia familiaArr[] = this.familias.toArray();
+
+        for (Familia familia : familiaArr) {
+            if (familia.getGeneradores().isEmpty() == false) {
+                this.familiasConGenerador.add(familia);
             }
         }
-
-        return familiasConGenerador;
     }
 }

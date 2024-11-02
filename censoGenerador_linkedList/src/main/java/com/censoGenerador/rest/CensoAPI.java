@@ -6,11 +6,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.censoGenerador.controls.dao.FamiliaDao;
+import com.censoGenerador.controls.dao.services.CensoServices;
 import com.censoGenerador.controls.dao.services.FamiliaServices;
 import com.censoGenerador.controls.dao.services.GeneradorServices;
-import com.censoGenerador.list.LinkedList;
-import com.censoGenerador.models.Familia;
 
 import java.util.HashMap;
 
@@ -18,19 +16,17 @@ import java.util.HashMap;
 public class CensoAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getFamiliesWithGenerador() {
+    public Response getFamiliesWithGenerador() throws Exception {
         HashMap map = new HashMap<>();
         FamiliaServices gs = new FamiliaServices();
-
-        try {
-
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CensoServices cs = new CensoServices();
+        
+        cs.getcenso().setFamilias(gs.getListAll());
+        cs.getcenso().determinarFamiliasConGenerador();
+        cs.saveFamiliasConGenerador();
 
         map.put("msg", "OK");
-        map.put("data", gs.getListAll().toArray());
+        map.put("data", cs.getcenso().getFamiliasConGenerador().toArray());
 
         return Response.ok(map).build();
     }
@@ -40,18 +36,20 @@ public class CensoAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllFamilies() {
         HashMap map = new HashMap<>();
-        FamiliaServices gs = new FamiliaServices();
+        FamiliaServices fs = new FamiliaServices();
+        GeneradorServices gs = new GeneradorServices();
 
         try {
-            gs.getFamilia().setApellido("Roman");
-            gs.getFamilia().setNroIntegrantes(3);
-            gs.save();
+            fs.getFamilia().setApellido("Roman");
+            fs.getFamilia().setNroIntegrantes(3);
+            fs.getFamilia().setGenerador(gs.getGenerador());
+            fs.save();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         map.put("msg", "OK");
-        map.put("data", gs.getListAll().toArray());
+        map.put("data", fs.getListAll().toArray());
 
         return Response.ok(map).build();
     }

@@ -75,7 +75,7 @@ public class AdapterDao<T> implements InterfazDao<T> {
         return sb.toString();
     }
 
-    private void saveFile(String data) throws Exception {
+    protected void saveFile(String data) throws Exception {
         File directory = new File(URL);
         if (!directory.exists()) {
             directory.mkdirs(); // Crea el directorio si no existe.

@@ -44,8 +44,7 @@ public class Familia {
         return this.generadores;
     }
 
-    //OPERACIONES
-    public void addGenerador(Generador generador) {
+    public void setGenerador(Generador generador) {
         this.generadores.add(generador);
     }
 
