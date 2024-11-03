@@ -34,4 +34,8 @@ public class FamiliaServices {
     public Boolean delete() throws Exception {
         return this.familia.delete();
     }
+
+    public Familia get(Integer id) throws Exception {
+        return this.familia.get(id);
+    }
 }

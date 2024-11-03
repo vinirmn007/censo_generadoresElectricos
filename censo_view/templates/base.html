@@ -65,12 +65,21 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item">
-                <a
-                  href="#"
-                  aria-expanded="false"
-                >
+                <a href="/">
                   <i class="fas fa-home"></i>
-                  <p>Dashboard</p>
+                  <p>Home</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/linkedList/">
+                  <i class="fas fa-home"></i>
+                  <p>Listas Enlazadas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/arrays/">
+                  <i class="fas fa-home"></i>
+                  <p>Arrays</p>
                 </a>
               </li>
             </ul>
@@ -80,9 +89,33 @@
       <!-- End Sidebar -->
 
       <!-- Main Content -->
+      <style>
+        .flash-message-container {
+          position: absolute;
+          top: 20px; 
+          left: 50%;
+          transform: translateX(-50%);
+          max-width: 500px;
+          width: 80%;
+          z-index: 1000; 
+        }
+      </style>
+
       <div class="main-panel">
-      {% block content %}
-      {% endblock %}
+        {% with messages = get_flashed_messages(with_categories=True) %}
+          {% if messages %}
+            <div class="flash-message-container">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
       </div>
     </div>
 

@@ -8,6 +8,7 @@ public class Generador {
     private Double energiaGenerada;
     private Float precio;
     private String uso;
+    private Familia familia;
 
     public Generador() {
         this.id = 0;
@@ -17,6 +18,7 @@ public class Generador {
         this.energiaGenerada = 0.0;
         this.precio = 0.0F;
         this.uso = "";
+        this.familia = null;
     }
 
     //SETTERS Y GETTERS
@@ -75,6 +77,14 @@ public class Generador {
     public void setUso(String uso) {
 		this.uso = uso;
 	}
+
+    public Familia getFamilia() {
+        return this.familia;
+    }
+
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
 
     @Override
     public String toString() {

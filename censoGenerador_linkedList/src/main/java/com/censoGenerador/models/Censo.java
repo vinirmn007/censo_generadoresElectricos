@@ -22,18 +22,22 @@ public class Censo {
     }
 
     public LinkedList<Familia> getFamiliasConGenerador() {
-        determinarFamiliasConGenerador();
         return this.familiasConGenerador;
     }
 
     public void determinarFamiliasConGenerador() {
         this.familiasConGenerador.reset();
 
-        Familia familiaArr[] = this.familias.toArray();
+        if (this.familias.isEmpty()) {
+            return;
+            
+        } else {
+            Familia familiaArr[] = this.familias.toArray();
 
-        for (Familia familia : familiaArr) {
-            if (familia.getGeneradores().isEmpty() == false) {
-                this.familiasConGenerador.add(familia);
+            for (Familia familia : familiaArr) {
+                if (familia.getGeneradores().isEmpty() == false) {
+                    this.familiasConGenerador.add(familia);
+                }
             }
         }
     }

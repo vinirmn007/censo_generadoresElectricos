@@ -46,7 +46,7 @@ public class FamiliaDao extends AdapterDao<Familia> {
 
     public Boolean update() throws Exception {
         try {
-            this.merge(this.familia, this.familia.getId()-1);
+            this.merge(this.familia, this.familia.getId());
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class FamiliaDao extends AdapterDao<Familia> {
 
     public Boolean delete() throws Exception {
         try {
-            this.delete(this.familia.getId()-1);
+            this.delete(this.familia.getId());
             return true;
         } catch (Exception e) {
             e.printStackTrace();

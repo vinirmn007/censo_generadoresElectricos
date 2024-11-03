@@ -11,11 +11,11 @@ public class CensoServices {
         this.censo = new CensoDao();
     }
 
-    public Censo getcenso() {
+    public Censo getCenso() {
         return this.censo.getCenso();
     }
 
-    public void setcenso(Censo censo) {
+    public void setCenso(Censo censo) {
         this.censo.setCenso(censo);
     }
 

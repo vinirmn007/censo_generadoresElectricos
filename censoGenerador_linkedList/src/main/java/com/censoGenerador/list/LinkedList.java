@@ -116,30 +116,28 @@ public class LinkedList<E> {
     public void delete(Integer index) throws ListEmptyException{
         if (isEmpty()) {
             throw new ListEmptyException("Error, Lista vacia");   
-        } else if (index.intValue() < 0 || index.intValue() >= this.size.intValue()) {
+        } else if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Error, fuera de rango");
         } else if (index == 0) {
             this.header = this.header.getNext();
-            this.size--;
         } else if (index == this.size-1){
             Node<E> before = getNode(this.size-2);
             before.setNext(null);
             this.last = before;
-            this.size--;
         } else {
             Node<E> before = getNode(index-1);
             Node<E> actual = getNode(index);
 
             before.setNext(actual.getNext());
-            actual = null;
         }
+        this.size--;
     }
 
     //MODIFICAR ELEMENTOS
     public void update(E info, Integer index) throws ListEmptyException, IndexOutOfBoundsException {
         if (isEmpty()) {
             throw new ListEmptyException("Error, Lista vacia");
-        } else if (index.intValue() < 0 || index.intValue() >= this.size.intValue()) {
+        } else if (index < 0 || index >= this.size) {
             throw new IndexOutOfBoundsException("Error, fuera de rango");
         } else if (index.intValue() == 0) {
             header.setInfo(info);

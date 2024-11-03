@@ -41,7 +41,16 @@ public class AdapterDao<T> implements InterfazDao<T> {
     @Override
     public void merge(T obj, Integer index) throws Exception {
         LinkedList<T> list = listAll();
-        list.update(obj, index);
+
+        for (int i = 0; i < list.getSize(); i++) {
+            T objActual = list.get(i);
+            Integer objId = (Integer) objActual.getClass().getMethod("getId").invoke(objActual);
+            if (objId.equals(index)) {
+                list.update(obj, i);
+                break;
+            }
+        }
+
         String info = gson.toJson(list.toArray());
         saveFile(info);
     }
@@ -50,16 +59,30 @@ public class AdapterDao<T> implements InterfazDao<T> {
     public T get(Integer id) throws Exception {
         LinkedList<T> list = listAll();
         if (!list.isEmpty()) {
-            T [] matrix = list.toArray();
-            return matrix[id-1];
-        }
+            for (int i = 0; i < list.getSize(); i++) {
+                T obj = list.get(i);
+                Integer objId = (Integer) obj.getClass().getMethod("getId").invoke(obj);
+                if (objId == id) {
+                    return obj;
+                }
+            }
+        } 
         return null;
     }
 
     @Override
     public void delete(Integer id) throws Exception {
         LinkedList<T> list = listAll();
-        list.delete(id);
+        
+        for (int i = 0; i < list.getSize(); i++) {
+            T obj = list.get(i);
+            Integer objId = (Integer) obj.getClass().getMethod("getId").invoke(obj);
+            if (objId == id) {
+                list.delete(i);
+                break;
+            }
+        }
+
         String info = gson.toJson(list.toArray());
         saveFile(info);
     }
@@ -78,7 +101,7 @@ public class AdapterDao<T> implements InterfazDao<T> {
     protected void saveFile(String data) throws Exception {
         File directory = new File(URL);
         if (!directory.exists()) {
-            directory.mkdirs(); // Crea el directorio si no existe.
+            directory.mkdirs();
         }
         FileWriter file = new FileWriter(URL + clazz.getSimpleName() + ".json");
         file.write(data);
